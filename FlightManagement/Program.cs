@@ -1,4 +1,4 @@
-using FlightManagement.Database;
+using FlightManagement.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

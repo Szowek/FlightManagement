@@ -1,4 +1,4 @@
-﻿using FlightManagement.Database.Database;
+﻿using FlightManagement.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightManagement.Database
+namespace FlightManagement.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {

@@ -1,4 +1,4 @@
-﻿using FlightManagement.Entities.ModelEntities;
+﻿using FlightManagement.Domain.ModelEntities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightManagement.Database.Database
+namespace FlightManagement.Infrastructure.Database
 {
     public class ApplicationDbContext : DbContext
     {

@@ -13,6 +13,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Infrastructure", "FlightManagement.Database\FlightManagement.Infrastructure.csproj", "{A219396F-78FC-44B2-ACFA-B495BF81E9D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManagement.Application", "FlightManagement.Application\FlightManagement.Application.csproj", "{3F5E390F-513B-4220-BA7C-03433962F556}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A219396F-78FC-44B2-ACFA-B495BF81E9D0} = {A219396F-78FC-44B2-ACFA-B495BF81E9D0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

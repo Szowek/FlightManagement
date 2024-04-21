@@ -1,5 +1,5 @@
-using FlightManagement.Database.Database;
-using FlightManagement.Entities.ModelEntities;
+using FlightManagement.Infrastructure.Database;
+using FlightManagement.Domain.ModelEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
