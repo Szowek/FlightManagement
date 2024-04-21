@@ -1,4 +1,4 @@
-using FlightManagement.Infrastructure.Database;
+using FlightManagement.Application.Services;
 using FlightManagement.Domain.ModelEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,88 +9,58 @@ namespace FlightManagement.Controllers
     [Route("[controller]")]
     public class FlightController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly FlightService _flightService;
 
-        public FlightController(ApplicationDbContext context)
+        public FlightController(FlightService flightService)
         {
-            _context = context;
+            _flightService = flightService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Flight>>> GetFlights()
         {
-            return await _context.Flights.ToListAsync();
+            var flights = await _flightService.GetAllFlightsAsync();
+            return Ok(flights);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Flight>> GetFlight(int id)
         {
-            var flight = await _context.Flights.FindAsync(id);
-
+            var flight = await _flightService.GetFlightByIdAsync(id);
             if (flight == null)
             {
                 return NotFound();
             }
-
-            return flight;
+            return Ok(flight);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Flight>> PostFlight(Flight flight)
+        public async Task<ActionResult<Flight>> CreateFlight(Flight flight)
         {
-            _context.Flights.Add(flight);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetFlight), new { id = flight.Id }, flight);
+            var createdFlight = await _flightService.CreateFlightAsync(flight);
+            return CreatedAtAction(nameof(GetFlight), new { id = createdFlight.Id }, createdFlight);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFlight(int id, Flight flight)
+        public async Task<IActionResult> UpdateFlight(int id, Flight flight)
         {
-            if (id != flight.Id)
+            var result = await _flightService.UpdateFlightAsync(id, flight);
+            if (!result)
             {
-                return BadRequest();
+                return NotFound();
             }
-
-            _context.Entry(flight).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FlightExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFlight(int id)
         {
-            var flight = await _context.Flights.FindAsync(id);
-            if (flight == null)
+            var result = await _flightService.DeleteFlightAsync(id);
+            if (!result)
             {
                 return NotFound();
             }
-
-            _context.Flights.Remove(flight);
-            await _context.SaveChangesAsync();
-
             return NoContent();
-        }
-
-        private bool FlightExists(int id)
-        {
-            return _context.Flights.Any(e => e.Id == id);
         }
     }
 }

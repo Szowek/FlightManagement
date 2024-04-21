@@ -1,4 +1,6 @@
+using FlightManagement.Application.Services;
 using FlightManagement.Infrastructure;
+using FlightManagement.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddDatabase(builder.Configuration);
+
+builder.Services.AddScoped<FlightService>();
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
 
 var app = builder.Build();
 
