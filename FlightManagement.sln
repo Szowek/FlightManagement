@@ -3,11 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManagement", "FlightManagement\FlightManagement.csproj", "{19985D0E-ED35-42D1-920F-B9CFC3CD68F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement", "FlightManagement\FlightManagement.csproj", "{19985D0E-ED35-42D1-920F-B9CFC3CD68F3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A219396F-78FC-44B2-ACFA-B495BF81E9D0} = {A219396F-78FC-44B2-ACFA-B495BF81E9D0}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManagement.Entities", "FlightManagement.Entities\FlightManagement.Entities.csproj", "{AB3F3D32-7923-480C-A9B1-B507E8E78B1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Entities", "FlightManagement.Entities\FlightManagement.Entities.csproj", "{AB3F3D32-7923-480C-A9B1-B507E8E78B1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManagement.Database", "FlightManagement.Database\FlightManagement.Database.csproj", "{A219396F-78FC-44B2-ACFA-B495BF81E9D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Database", "FlightManagement.Database\FlightManagement.Database.csproj", "{A219396F-78FC-44B2-ACFA-B495BF81E9D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
