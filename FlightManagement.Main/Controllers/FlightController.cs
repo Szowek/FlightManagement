@@ -31,5 +31,16 @@ namespace FlightManagement.Main.Controllers
             }
             return NotFound();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Flight flight)
+        {
+            if (ModelState.IsValid)
+            {
+                await _flightService.CreateFlightAsync(flight);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(flight);
+        }
     }
 }
