@@ -42,5 +42,20 @@ namespace FlightManagement.Main.Controllers
             }
             return View(flight);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(Flight flight)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _flightService.UpdateFlightAsync(flight.Id, flight);
+                if (result)
+                {
+                    return Json(new { success = true });
+                }
+                return Json(new { success = false, message = "Nie można zaktualizować lotu." });
+            }
+            return View(flight);
+        }
     }
 }

@@ -18,11 +18,12 @@
         {
             <tr>
                 <td>@flight.FlightNumber</td>
-                <td>@flight.DepartureDate</td>
+                <td data-departure-date="@flight.DepartureDate">@flight.DepartureDate</td>
                 <td>@flight.DepartureLocation</td>
                 <td>@flight.ArrivalLocation</td>
                 <td>@flight.AircraftType</td>
                 <td>
+                    <button type="button" class="btn btn-primary edit-flight-btn" data-flight-id="@flight.Id">Edytuj</button>
                     <form method="post" asp-controller="Flight" asp-action="Delete" asp-route-id="@flight.Id" onsubmit="return confirm('Czy na pewno chcesz usunąć ten lot?');">
                         <button type="submit" class="btn btn-danger">Usuń</button>
                     </form>
@@ -58,3 +59,88 @@
         <button type="submit" class="btn btn-primary">Dodaj lot</button>
     </form>
 </div>
+
+<div id="edit-flight-form" style="display: none;">
+    <h2>Aktualizuj lot</h2>
+    <form method="post" asp-controller="Flight" asp-action="Update" id="update-flight-form">
+        <input type="hidden" id="editFlightId" name="Id" />
+        <div class="form-group">
+            <label for="editFlightNumber">Numer lotu:</label>
+            <input type="text" class="form-control" id="editFlightNumber" name="FlightNumber">
+        </div>
+        <div class="form-group">
+            <label for="editDepartureDate">Data odlotu:</label>
+            <input type="datetime-local" class="form-control" id="editDepartureDate" name="DepartureDate">
+        </div>
+        <div class="form-group">
+            <label for="editDepartureLocation">Miejsce odlotu:</label>
+            <input type="text" class="form-control" id="editDepartureLocation" name="DepartureLocation">
+        </div>
+        <div class="form-group">
+            <label for="editArrivalLocation">Miejsce przylotu:</label>
+            <input type="text" class="form-control" id="editArrivalLocation" name="ArrivalLocation">
+        </div>
+        <div class="form-group">
+            <label for="editAircraftType">Typ samolotu:</label>
+            <input type="text" class="form-control" id="editAircraftType" name="AircraftType">
+        </div>
+        <button type="submit" class="btn btn-primary">Aktualizuj lot</button>
+        <button type="button" class="btn btn-secondary cancel-edit-btn">Anuluj</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.edit-flight-btn').click(function () {
+                var flightId = $(this).data('flight-id');
+                var row = $(this).closest('tr');
+
+                var flightNumber = row.find('td:nth-child(1)').text().trim();
+                var departureDate = row.find('td:nth-child(2)').data('departure-date');
+                var departureLocation = row.find('td:nth-child(3)').text().trim();
+                var arrivalLocation = row.find('td:nth-child(4)').text().trim();
+                var aircraftType = row.find('td:nth-child(5)').text().trim();
+
+                var dateParts = departureDate.split(' ');
+                var dateWithoutTime = dateParts[0];
+                var timeWithoutDate = dateParts[1];
+                var formattedDate = dateWithoutTime.split('.').reverse().join('-') + 'T' + timeWithoutDate;
+
+                $('#editFlightId').val(flightId);
+                $('#editFlightNumber').val(flightNumber);
+                $('#editDepartureDate').val(formattedDate);
+                $('#editDepartureLocation').val(departureLocation);
+                $('#editArrivalLocation').val(arrivalLocation);
+                $('#editAircraftType').val(aircraftType);
+
+                $('#edit-flight-form').show();
+                window.scrollTo(0, $(document).height());
+            });
+
+            $('#update-flight-form').submit(function (e) {
+                e.preventDefault();
+                var formData = $(this).serialize();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Wystąpił problem podczas aktualizacji lotu.');
+                        }
+                    },
+                    error: function () {
+                        alert('Wystąpił błąd - podaj poprawne dane.');
+                    }
+                });
+            });
+
+            $('.cancel-edit-btn').click(function () {
+                $('#edit-flight-form').hide();
+            });
+        });
+    </script>
+}
