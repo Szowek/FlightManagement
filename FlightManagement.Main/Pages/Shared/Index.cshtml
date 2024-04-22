@@ -1,0 +1,33 @@
+﻿@model IEnumerable<FlightManagement.Domain.ModelEntities.Flight>
+
+<h1>Lista Lotów</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numer Lotu</th>
+            <th>Data Odlotu</th>
+            <th>Miejsce Odlotu</th>
+            <th>Miejsce Przylotu</th>
+            <th>Typ Samolotu</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in Model)
+        {
+            <tr>
+                <td>@flight.FlightNumber</td>
+                <td>@flight.DepartureDate</td>
+                <td>@flight.DepartureLocation</td>
+                <td>@flight.ArrivalLocation</td>
+                <td>@flight.AircraftType</td>
+                <td>
+                    <form method="post" asp-controller="Flight" asp-action="Delete" asp-route-id="@flight.Id" onsubmit="return confirm('Czy na pewno chcesz usunąć ten lot?');">
+                        <button type="submit" class="btn btn-danger">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

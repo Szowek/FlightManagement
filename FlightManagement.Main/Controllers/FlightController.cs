@@ -1,0 +1,35 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using FlightManagement.Application.Services;
+using FlightManagement.Domain.ModelEntities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace FlightManagement.Main.Controllers
+{
+    public class FlightController : Controller
+    {
+        private readonly FlightService _flightService;
+
+        public FlightController(FlightService flightService)
+        {
+            _flightService = flightService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            IEnumerable<Flight> flights = await _flightService.GetAllFlightsAsync();
+            return View(flights);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _flightService.DeleteFlightAsync(id);
+            if (result)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return NotFound();
+        }
+    }
+}

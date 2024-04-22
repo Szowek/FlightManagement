@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FlightManagement.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class FlightController : ControllerBase
+    public class FlightController : Controller
     {
         private readonly FlightService _flightService;
 
@@ -16,51 +14,113 @@ namespace FlightManagement.Controllers
             _flightService = flightService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Flight>>> GetFlights()
+        // GET: Flight
+        public async Task<IActionResult> Index()
         {
-            var flights = await _flightService.GetAllFlightsAsync();
-            return Ok(flights);
+            IEnumerable<Flight> flights = await _flightService.GetAllFlightsAsync();
+            return View(flights);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Flight>> GetFlight(int id)
+        // GET: Flight/Details/5
+        public async Task<IActionResult> Details(int id)
         {
-            var flight = await _flightService.GetFlightByIdAsync(id);
+            Flight flight = await _flightService.GetFlightByIdAsync(id);
             if (flight == null)
             {
                 return NotFound();
             }
-            return Ok(flight);
+
+            return View(flight);
         }
 
+        // GET: Flight/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Flight/Create
         [HttpPost]
-        public async Task<ActionResult<Flight>> CreateFlight(Flight flight)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("FlightNumber, DepartureDate, DepartureLocation, ArrivalLocation, AircraftType")] Flight flight)
         {
-            var createdFlight = await _flightService.CreateFlightAsync(flight);
-            return CreatedAtAction(nameof(GetFlight), new { id = createdFlight.Id }, createdFlight);
+            if (ModelState.IsValid)
+            {
+                await _flightService.CreateFlightAsync(flight);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(flight);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateFlight(int id, Flight flight)
+        // GET: Flight/Edit/5
+        public async Task<IActionResult> Edit(int id)
         {
-            var result = await _flightService.UpdateFlightAsync(id, flight);
-            if (!result)
+            Flight flight = await _flightService.GetFlightByIdAsync(id);
+            if (flight == null)
             {
                 return NotFound();
             }
-            return NoContent();
+            return View(flight);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFlight(int id)
+        // POST: Flight/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, FlightNumber, DepartureDate, DepartureLocation, ArrivalLocation, AircraftType")] Flight flight)
         {
-            var result = await _flightService.DeleteFlightAsync(id);
-            if (!result)
+            if (id != flight.Id)
             {
                 return NotFound();
             }
-            return NoContent();
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _flightService.UpdateFlightAsync(id, flight);
+                }
+                catch (Exception)
+                {
+                    if (!FlightExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(flight);
+        }
+
+        // GET: Flight/Delete/5
+        public async Task<IActionResult> Delete(int id)
+        {
+            Flight flight = await _flightService.GetFlightByIdAsync(id);
+            if (flight == null)
+            {
+                return NotFound();
+            }
+
+            return View(flight);
+        }
+
+        // POST: Flight/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _flightService.DeleteFlightAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool FlightExists(int id)
+        {
+            // You can implement this method based on your requirements
+            // For simplicity, I'm assuming that if Flight with the provided id exists, return true
+            return true;
         }
     }
 }

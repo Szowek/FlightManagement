@@ -3,19 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement", "FlightManagement\FlightManagement.csproj", "{19985D0E-ED35-42D1-920F-B9CFC3CD68F3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A219396F-78FC-44B2-ACFA-B495BF81E9D0} = {A219396F-78FC-44B2-ACFA-B495BF81E9D0}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Domain", "FlightManagement.Entities\FlightManagement.Domain.csproj", "{AB3F3D32-7923-480C-A9B1-B507E8E78B1F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Infrastructure", "FlightManagement.Database\FlightManagement.Infrastructure.csproj", "{A219396F-78FC-44B2-ACFA-B495BF81E9D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManagement.Application", "FlightManagement.Application\FlightManagement.Application.csproj", "{3F5E390F-513B-4220-BA7C-03433962F556}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Application", "FlightManagement.Application\FlightManagement.Application.csproj", "{3F5E390F-513B-4220-BA7C-03433962F556}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A219396F-78FC-44B2-ACFA-B495BF81E9D0} = {A219396F-78FC-44B2-ACFA-B495BF81E9D0}
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Main", "FlightManagement.Main\FlightManagement.Main.csproj", "{8AE19722-8AC1-476F-9A1D-94DA3C55A4C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +20,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{19985D0E-ED35-42D1-920F-B9CFC3CD68F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19985D0E-ED35-42D1-920F-B9CFC3CD68F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19985D0E-ED35-42D1-920F-B9CFC3CD68F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19985D0E-ED35-42D1-920F-B9CFC3CD68F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB3F3D32-7923-480C-A9B1-B507E8E78B1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB3F3D32-7923-480C-A9B1-B507E8E78B1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB3F3D32-7923-480C-A9B1-B507E8E78B1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +32,10 @@ Global
 		{3F5E390F-513B-4220-BA7C-03433962F556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F5E390F-513B-4220-BA7C-03433962F556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F5E390F-513B-4220-BA7C-03433962F556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AE19722-8AC1-476F-9A1D-94DA3C55A4C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE19722-8AC1-476F-9A1D-94DA3C55A4C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE19722-8AC1-476F-9A1D-94DA3C55A4C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE19722-8AC1-476F-9A1D-94DA3C55A4C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
