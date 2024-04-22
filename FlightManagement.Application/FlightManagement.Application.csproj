@@ -10,6 +10,6 @@
     <PackageReference Include="Moq" Version="4.20.70" />
   </ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\FlightManagement.Database\FlightManagement.Infrastructure.csproj" />
+		<ProjectReference Include="..\FlightManagement.Infrastructure\FlightManagement.Infrastructure.csproj" />
 	</ItemGroup>
 </Project>

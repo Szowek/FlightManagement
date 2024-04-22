@@ -18,12 +18,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\FlightManagement.Database\FlightManagement.Infrastructure.csproj" />
+		<ProjectReference Include="..\FlightManagement.Infrastructure\FlightManagement.Infrastructure.csproj" />
 		<ProjectReference Include="..\FlightManagement.Application\FlightManagement.Application.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Pages\Flight\" />
 	</ItemGroup>
 	
 </Project>

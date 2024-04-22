@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Domain", "FlightManagement.Entities\FlightManagement.Domain.csproj", "{AB3F3D32-7923-480C-A9B1-B507E8E78B1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Domain", "FlightManagement.Domain\FlightManagement.Domain.csproj", "{AB3F3D32-7923-480C-A9B1-B507E8E78B1F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Infrastructure", "FlightManagement.Database\FlightManagement.Infrastructure.csproj", "{A219396F-78FC-44B2-ACFA-B495BF81E9D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Infrastructure", "FlightManagement.Infrastructure\FlightManagement.Infrastructure.csproj", "{A219396F-78FC-44B2-ACFA-B495BF81E9D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagement.Application", "FlightManagement.Application\FlightManagement.Application.csproj", "{3F5E390F-513B-4220-BA7C-03433962F556}"
 	ProjectSection(ProjectDependencies) = postProject

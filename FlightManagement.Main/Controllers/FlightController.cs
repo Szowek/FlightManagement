@@ -55,11 +55,7 @@ namespace FlightManagement.Main.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _flightService.UpdateFlightAsync(flight.Id, flight);
-                if (result)
-                {
-                    return Json(new { success = true });
-                }
-                return Json(new { success = false, message = "Nie można zaktualizować lotu." });
+                return RedirectToAction(nameof(Index));
             }
             var flights = await _flightService.GetAllFlightsAsync();
             return View("Index", flights);

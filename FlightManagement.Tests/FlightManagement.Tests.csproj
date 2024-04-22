@@ -18,9 +18,9 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\FlightManagement.Database\FlightManagement.Infrastructure.csproj" />
+		<ProjectReference Include="..\FlightManagement.Infrastructure\FlightManagement.Infrastructure.csproj" />
 		<ProjectReference Include="..\FlightManagement.Application\FlightManagement.Application.csproj" />
-		<ProjectReference Include="..\FlightManagement.Entities\FlightManagement.Domain.csproj" />
+		<ProjectReference Include="..\FlightManagement.Domain\FlightManagement.Domain.csproj" />
 	</ItemGroup>
 	
   <ItemGroup>
