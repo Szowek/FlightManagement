@@ -33,6 +33,7 @@ namespace FlightManagement.Main.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Flight flight)
         {
             if (ModelState.IsValid)
@@ -40,10 +41,13 @@ namespace FlightManagement.Main.Controllers
                 await _flightService.CreateFlightAsync(flight);
                 return RedirectToAction(nameof(Index));
             }
-            return View(flight);
+
+            var flights = await _flightService.GetAllFlightsAsync();
+            return View("Index", flights);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(Flight flight)
         {
             if (ModelState.IsValid)
@@ -55,7 +59,8 @@ namespace FlightManagement.Main.Controllers
                 }
                 return Json(new { success = false, message = "Nie można zaktualizować lotu." });
             }
-            return View(flight);
+            var flights = await _flightService.GetAllFlightsAsync();
+            return View("Index", flights);
         }
     }
 }

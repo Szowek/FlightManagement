@@ -14,6 +14,21 @@
         </tr>
     </thead>
     <tbody>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach (var modelState in ViewData.ModelState.Values)
+                    {
+                        foreach (var error in modelState.Errors)
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+
         @foreach (var flight in Model)
         {
             <tr>
@@ -116,26 +131,6 @@
 
                 $('#edit-flight-form').show();
                 window.scrollTo(0, $(document).height());
-            });
-
-            $('#update-flight-form').submit(function (e) {
-                e.preventDefault();
-                var formData = $(this).serialize();
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'POST',
-                    data: formData,
-                    success: function (data) {
-                        if (data.success) {
-                            location.reload();
-                        } else {
-                            alert('Wystąpił problem podczas aktualizacji lotu.');
-                        }
-                    },
-                    error: function () {
-                        alert('Wystąpił błąd - podaj poprawne dane.');
-                    }
-                });
             });
 
             $('.cancel-edit-btn').click(function () {
