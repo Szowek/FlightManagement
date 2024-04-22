@@ -3,9 +3,11 @@ using FlightManagement.Application.Services;
 using FlightManagement.Domain.ModelEntities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FlightManagement.Main.Controllers
 {
+    [Authorize]
     public class FlightController : Controller
     {
         private readonly FlightService _flightService;
